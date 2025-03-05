@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { SearchIcon } from '@/components/Icons';
-import { green } from 'react-native-reanimated/lib/typescript/Colors';
 
 export default function SearchBar() {
     return (
