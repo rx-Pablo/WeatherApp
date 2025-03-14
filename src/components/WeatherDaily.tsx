@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { SunIcon } from './Icons';
+import { SunIcon, CloudRainIcon, CloudSunRainIcon, CloudIcon } from './Icons';
 
 type ForecastDay = {
   date: string;
@@ -71,14 +71,30 @@ export default function WeatherDaily({ day }: WeatherDailyProps) {
   const dayForecast = weatherData.forecast.forecastday[day];
   const dayName = obtenerNombreDelDia(dayForecast.date);
 
+  // Función para determinar y renderizar el ícono de acuerdo a la condición
+  const renderWeatherIcon = () => {
+    const conditionText = dayForecast.day.condition.text.toLowerCase();
+    
+    if (conditionText.includes("rain")) {
+      if (conditionText.includes("sun")) {
+        return <CloudSunRainIcon size={85} className="pb-1" />;
+      }
+      return <CloudRainIcon size={85} className="pb-1" />;
+    } else if (conditionText.includes("cloud")) {
+      return <CloudIcon size={85} className="pb-1" />;
+    } else {
+      return <SunIcon size={85} className="pb-1" />;
+    }
+  };
+
   return (
     <View className='pl-3 pr-3 pt-3 pb-6'>
       <View className='bg-[#7FB6EC80] bg-opacity-75 h-56 w-48 rounded-3xl flex flex-col items-center'>
         <Text className='text-lg font-bold text-white pt-2 pb-4'>{dayName}</Text>
-        <SunIcon size={85} className="pb-1" />
+        {renderWeatherIcon()}
         <View className='flex flex-row justify-between w-40 pt-5'>
           <Text className='text-lg font-normal text-white pt-2'>Min: {dayForecast.day.mintemp_c}°</Text>               
-          <Text className='text-lg font-normal text-white pt-2'>Max: {dayForecast.day.maxtemp_c}°</Text>               
+          <Text className='text-lg font-normal text-white pt-2 pl-2 pr-2'>Max: {dayForecast.day.maxtemp_c}°</Text>               
         </View>
       </View>
     </View>
