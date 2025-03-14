@@ -7,32 +7,21 @@ import WeatherData from "@/components/WeatherData";
 import { ScrollView, View } from "react-native";
 
 export default function Page() {
-  const [weatherData,setWeatherData]= React.useState(() => {fetch(
-    `http://api.weatherapi.com/v1/current.json?key=53d4751b1e4646c297a03153250503&q=Buenos-Aires`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      setWeatherData(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    }
- )});
 
   return (
     <Screen>
       <SearchBar />
-      <WeatherData />
+      <WeatherData  day={0}/>
       <WeatherHourly />
       <View className='flex flex-row justify-between pl-1 pr-1 pt-2 pb-5'>
         <ScrollView horizontal={true}>
-          <WeatherDaily />
-          <WeatherDaily />
-          <WeatherDaily />
-          <WeatherDaily />
-          <WeatherDaily />
-          <WeatherDaily />
-          <WeatherDaily />  
+          <WeatherDaily day={0}/>
+          <WeatherDaily day={1}/>
+          <WeatherDaily day={2}/>
+          <WeatherDaily day={3}/>
+          <WeatherDaily day={4}/>
+          <WeatherDaily day={5}/>
+          <WeatherDaily day={6}/>  
         </ScrollView>      
       </View>
     </Screen>
