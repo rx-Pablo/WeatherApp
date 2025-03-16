@@ -68,8 +68,8 @@ export default function WeatherHourly() {
     }, []);
 
     if (!weatherData) {
-    return <Text>Cargando datos...</Text>;
-    };
+      return <></>;
+    }  
 
     const currentLocalTime = new Date(weatherData.location.localtime.replace(" ", "T"));
     const forecastHours = weatherData.forecast.forecastday[0].hour;
@@ -80,39 +80,43 @@ export default function WeatherHourly() {
     });
 
     const renderWeatherIcon = (hourData: { condition: { text: string } }) => {
-        const conditionText = hourData.condition.text.toLowerCase();
+    const conditionText = hourData.condition.text.toLowerCase();
         
-        if (conditionText.includes("rain")) {
-          if (conditionText.includes("sun")) {
-            return <CloudSunRainIcon size={28} className="pb-1" />;
-          }
-          return <CloudRainIcon size={28} className="pb-1" />;
-        } else if (conditionText.includes("cloud")) {
-          return <CloudIcon size={28} className="pb-1" />;
-        } else {
-          return <SunIcon size={28} className="pb-1" />;
-        }
-    };
+    if (conditionText.includes("rain")) {
+      if (conditionText.includes("sun")) {
+        return <CloudSunRainIcon size={28} className="pb-1" />;
+      }
+      return <CloudRainIcon size={28} className="pb-1" />;
+    } else if (conditionText.includes("cloud")) {
+        return <CloudIcon size={28} className="pb-1" />;
+    } else {
+      return <SunIcon size={28} className="pb-1" />;
+    }
+  };
 
-    return (
-        <View className='pl-4 pr-4 pt-6'>
-            <View className='bg-[#7FB6EC80] bg-opacity-75 h-36 w-full rounded-3xl flex flex-col items-center'>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {filteredHours.map((hourData, index) => {
-                    const hourLabel = hourData.time.split(' ')[1].slice(0,5);
-                    return (
-                        <View key={index} className='flex flex-1 items-center w-32 h-10'>
-                            <Text className='text-white font-extrabold text-l pt-3 pb-3'>{hourData.condition.text}</Text>
-                            <View className='pt-1'>
-                                {renderWeatherIcon(hourData)}
-                            </View>
-                            <Text className='text-white font-extrabold text-l pt-3 pb-3'>{hourData.temp_c}°C</Text>
-                            <Text className='text-white font-extrabold text-l'>{hourLabel}</Text>                            
-                        </View>
-                    );
-                    })}
-                </ScrollView>
-            </View>
-        </View>
-    );
+  const roundTemperature = (temp: number): number => {
+    return Math.round(temp);
+  };
+
+  return (
+      <View className='pr-2 pl-2'>
+          <View className='bg-[#7FB6EC80] bg-opacity-75 h-40 w-full rounded-3xl flex flex-col items-center'>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                  {filteredHours.map((hourData, index) => {
+                  const hourLabel = hourData.time.split(' ')[1].slice(0,5);
+                  return (
+                      <View key={index} className='flex flex-1 items-center w-32 h-10'>
+                          <Text className='text-white font-extrabold text-l pt-5'>{hourData.condition.text}</Text>
+                          <View className='pt-1'>
+                              {renderWeatherIcon(hourData)}
+                          </View>
+                          <Text className='text-white font-extrabold text-l pt-3 pb-3'>{roundTemperature(hourData.temp_c)}°C</Text>
+                          <Text className='text-white font-extrabold text-l'>{hourLabel}</Text>                            
+                      </View>
+                  );
+                  })}
+              </ScrollView>
+          </View>
+      </View>
+  );
 }

@@ -55,7 +55,7 @@ export default function WeatherData({ day }: WeatherDataProps) {
   }, []);
 
   if (!weatherData) {
-    return <Text>Cargando datos...</Text>;
+    return <></>;
   }
 
   const dayForecast = weatherData.forecast.forecastday[day];
@@ -76,16 +76,21 @@ export default function WeatherData({ day }: WeatherDataProps) {
     }
   };
 
+  const roundTemperature = (temp: number): number => {
+    return Math.round(temp);
+  };
+  
   return (
-    <View className="pl-4 pr-2 pt-6">
-      <View className="h-72 rounded-3xl flex flex-col">
-        <View className="flex flex-row items-center pt-32">
-          <Text className="text-white font-bold text-3xl pl-4 pt-3 pb-8">{weatherData.location.name}:</Text>
-          <Text className="text-white font-bold text-7xl pt-4 pl-12">{weatherData.current.temp_c}° </Text>
-        </View>
-        <View className="flex flex-row justify-between w-86 pt-5">
-          <Text className="text-white font-bold text-2xl pl-5 pt-8">Min: {dayForecast.day.mintemp_c}°</Text>
-          <Text className="text-white font-bold text-2xl pt-8 pr-8">Max: {dayForecast.day.maxtemp_c}°</Text>
+    <View className="pl-4 pr-2 pb-2">
+      <View className="h-64 rounded-3xl flex flex-col">
+        <View className="flex items-center pt-8">
+          <Text className="text-white font-bold text-3xl pt-1 pb-2">{weatherData.location.name}</Text>
+          <Text className="text-white font-bold text-7xl pt-2 pl-10">{roundTemperature(weatherData.current.temp_c)}° </Text>
+          <Text className="text-white font-bold text-4xl pt-2 ">{weatherData.current.condition.text}</Text>
+          <View className="flex flex-row pt-4">
+            <Text className="text-white font-bold text-2xl">{roundTemperature(dayForecast.day.mintemp_c)}° - </Text>
+            <Text className="text-white font-bold text-2xl">{roundTemperature(dayForecast.day.maxtemp_c)}°</Text>
+          </View>
         </View>
       </View>
     </View>
