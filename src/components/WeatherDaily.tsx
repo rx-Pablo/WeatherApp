@@ -88,7 +88,7 @@ export default function WeatherDaily({ day }: WeatherDailyProps) {
   };
 
   return (
-    <View className='pl-3 pr-3 pt-3 pb-6'>
+    <View className='pl-1 pr-1 pt-1 pb-3'>
       <View className='bg-[#7FB6EC80] bg-opacity-75 h-56 w-48 rounded-3xl flex flex-col items-center'>
         <Text className='text-lg font-bold text-white pt-2 pb-4'>{dayName}</Text>
         {renderWeatherIcon()}

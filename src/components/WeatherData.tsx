@@ -79,21 +79,13 @@ export default function WeatherData({ day }: WeatherDataProps) {
   return (
     <View className="pl-4 pr-2 pt-6">
       <View className="h-72 rounded-3xl flex flex-col">
-        <View className="flex flex-row items-center pt-24">
-          <Text className="text-white font-bold text-3xl pl-4 pt-3 pb-8">
-            {weatherData.location.name}:
-          </Text>
-          <Text className="text-white font-bold text-7xl pt-4 pl-12">
-            {weatherData.current.temp_c}°
-          </Text>
+        <View className="flex flex-row items-center pt-32">
+          <Text className="text-white font-bold text-3xl pl-4 pt-3 pb-8">{weatherData.location.name}:</Text>
+          <Text className="text-white font-bold text-7xl pt-4 pl-12">{weatherData.current.temp_c}° </Text>
         </View>
         <View className="flex flex-row justify-between w-86 pt-5">
-          <Text className="text-white font-bold text-2xl pl-5 pt-8">
-            Min: {dayForecast.day.mintemp_c}°
-          </Text>
-          <Text className="text-white font-bold text-2xl pt-8 pr-8">
-            Max: {dayForecast.day.maxtemp_c}°
-          </Text>
+          <Text className="text-white font-bold text-2xl pl-5 pt-8">Min: {dayForecast.day.mintemp_c}°</Text>
+          <Text className="text-white font-bold text-2xl pt-8 pr-8">Max: {dayForecast.day.maxtemp_c}°</Text>
         </View>
       </View>
     </View>

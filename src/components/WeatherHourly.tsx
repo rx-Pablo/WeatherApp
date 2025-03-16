@@ -95,15 +95,15 @@ export default function WeatherHourly() {
     };
 
     return (
-        <View className='pl-4 pr-4 pt-1'>
-            <View className='bg-[#7FB6EC80] bg-opacity-75 h-40 w-full rounded-3xl flex flex-col items-center'>
+        <View className='pl-4 pr-4 pt-6'>
+            <View className='bg-[#7FB6EC80] bg-opacity-75 h-36 w-full rounded-3xl flex flex-col items-center'>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {filteredHours.map((hourData, index) => {
                     const hourLabel = hourData.time.split(' ')[1].slice(0,5);
                     return (
-                        <View key={index} className='flex flex-1 items-center w-32 h-14'>
+                        <View key={index} className='flex flex-1 items-center w-32 h-10'>
                             <Text className='text-white font-extrabold text-l pt-3 pb-3'>{hourData.condition.text}</Text>
-                            <View className='pt-3'>
+                            <View className='pt-1'>
                                 {renderWeatherIcon(hourData)}
                             </View>
                             <Text className='text-white font-extrabold text-l pt-3 pb-3'>{hourData.temp_c}°C</Text>

@@ -13,7 +13,7 @@ export default function Page() {
       <SearchBar />
       <WeatherData  day={0}/>
       <WeatherHourly />
-      <View className='flex flex-row justify-between pl-1 pr-1 pt-2 pb-5'>
+      <View className='flex flex-row justify-between pl-1 pr-1 pt-2 pb-2'>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <WeatherDaily day={0}/>
           <WeatherDaily day={1}/>
