@@ -14,7 +14,7 @@ export default function Page() {
       <WeatherData  day={0}/>
       <WeatherHourly />
       <View className='flex flex-row justify-between pl-1 pr-1 pt-2 pb-5'>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <WeatherDaily day={0}/>
           <WeatherDaily day={1}/>
           <WeatherDaily day={2}/>
